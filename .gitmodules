@@ -1,0 +1,12 @@
+[submodule "new-years-api"]
+	path = new-years-api
+	url = ./new-years-api
+[submodule "new-years-client"]
+	path = new-years-client
+	url = ./new-years-client/
+[submodule "new-years-functions"]
+	path = new-years-functions
+	url = ./new-years-functions/
+[submodule "new-years-mongo"]
+	path = new-years-mongo
+	url = ./new-years-mongo/
