@@ -1,12 +1,12 @@
 [submodule "new-years-api"]
 	path = new-years-api
-	url = ./new-years-api
+	url = git://github.com/haydenbr/new-years-api.git
 [submodule "new-years-client"]
 	path = new-years-client
-	url = ./new-years-client/
+	url = git://github.com/haydenbr/new-years-client.git
 [submodule "new-years-functions"]
 	path = new-years-functions
-	url = ./new-years-functions/
+	url = git://github.com/haydenbr/new-years-functions.git
 [submodule "new-years-mongo"]
 	path = new-years-mongo
-	url = ./new-years-mongo/
+	url = git://github.com/haydenbr/new-years-mongo.git
