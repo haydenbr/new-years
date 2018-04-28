@@ -1,0 +1,14 @@
+{
+  "name": "new-years",
+  "version": "0.0.0",
+  "description": "parent repo for front end and back end new-years projects",
+  "main": "index.js",
+  "repository": "https://github.com/github:haydenbr/new-years",
+  "author": "Hayden Braxton",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "start": "docker-compose -f ./docker-compose.dev.yml -f ./new-years-client/docker-compose.dev.yml -f ./new-years-api/docker-compose.dev.yml -f ./new-years-functions/docker-compose.dev.yml up",
+    "down": "docker-compose -f ./docker-compose.dev.yml -f ./new-years-client/docker-compose.dev.yml -f ./new-years-api/docker-compose.dev.yml -f ./new-years-functions/docker-compose.dev.yml down"
+  }
+}
