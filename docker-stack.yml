@@ -1,0 +1,79 @@
+version: '3.2'
+services:
+
+  new-years-client:
+    image: haydenbr/new-years-client:3.0.1
+    ports:
+      - '5000:80'
+    environment:
+      - 'API_URL=http://new-years-api:3000'
+      - 'FUNCTIONS_URL=http://new-years-functions:3100/api'
+    networks:
+      - new-years-client
+      - new-years-api
+      - new-years-functions
+    depends_on:
+      - new-years-api
+      - new-years-functions
+    deploy:
+      replicas: 2
+      update_config:
+        parallelism: 2
+      restart_policy:
+        condition: on-failure
+
+  new-years-api:
+    image: 'haydenbr/new-years-api:0.2.2'
+    ports:
+      - target: 3000
+        published: 3000
+        mode: 'host'
+    networks:
+      - new-years-api
+    depends_on:
+      - new-years-mongo
+    environment:
+      - 'MONGO_URL=mongodb://new-years-mongo:27017/new-years-resolutions'
+    deploy:
+      replicas: 1
+      update_config:
+        parallelism: 2
+        delay: 10s
+      restart_policy:
+        condition: on-failure
+
+  new-years-mongo:
+    image: haydenbr/new-years-mongo
+    ports:
+      - '27017:27017'
+    volumes:
+      - 'new-years-mongo:/data/db'
+    networks:
+      - new-years-api
+    deploy:
+      placement:
+        constraints: [node.role == manager]
+
+  new-years-functions:
+    image: haydenbr/new-years-functions:0.0.3
+    ports:
+      - target: 80
+        published: 3100
+        mode: 'host'
+    networks:
+      - new-years-functions
+    deploy:
+      replicas: 1
+      update_config:
+        parallelism: 2
+        delay: 10s
+      restart_policy:
+        condition: on-failure
+
+networks:
+  new-years-api:
+  new-years-client:
+  new-years-functions:
+
+volumes:
+  new-years-mongo:
